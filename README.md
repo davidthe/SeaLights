@@ -1,6 +1,6 @@
-# SeaLights
+# SeaLights Exercise
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+This project is an implementation of a frontend application using Angular, NgRx store, and reactive forms. The project includes two main views: a form to add a new user and a list to display added users.
 
 - [X] Create User
 - [X] Add / Remove an Address
@@ -9,24 +9,49 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - [X] Display List of Added Users
 - [X] Integrate Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Project Structure
 
-## Code scaffolding
+1. **User List Component:**
+   * Displays the list of added users with columns for ID, name, birthdate, and address count.
+   * Includes a button to navigate to the user form.
+2. **User Form Component:**
+   * Form to add a new user with required fields (User Name, Address Name, Street).
+   * Includes functionality to add and remove addresses.
+   * Uses reactive forms for validation and form control.
+   * Address is created as a separate component implementing Control Value Accessor.
+   * Save address button is disabled until the form is valid.
+   * When adding a new city, the relevant dropdowns are updated.
+3. **Address Component:**
+   * Implements Control Value Accessor for custom form control.
+   * Allows adding and removing addresses within the user form.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Getting Started
 
-## Build
+### Prerequisites
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* Node.js and npm installed
+* Angular CLI installed
 
-## Running unit tests
+## Installation
+### Clone the repository:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+git clone https://github.com/davidthe/SeaLights.git
+cd SeaLights
+```
+### Install dependencies:
 
-## Running end-to-end tests
+```bash
+npm install
+```
+### Start the development server:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
+Open your browser and navigate to http://localhost:4200.
+
+For the server go to https://github.com/NaorT/Sealights-task and folow instructions
 
 ## Ngrex-store usage
-
-https://ngrx.io/generated/images/guide/store/state-management-lifecycle.png
+![alt text](https://ngrx.io/generated/images/guide/store/state-management-lifecycle.png)
