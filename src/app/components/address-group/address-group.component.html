@@ -1,0 +1,5 @@
+<div *ngFor="let address of addresses.controls; let i = index">
+  <app-address [addressForm]="address"></app-address>
+  <button mat-button (click)="removeAddress(i)">Remove Address</button>
+</div>
+<button mat-button (click)="addAddress()">Add Address</button>
