@@ -18,7 +18,7 @@ export class CityEffects {
       this.actions$.pipe(
         ofType(CityActions.loadCities),
         mergeMap((action) =>
-          this.http.get<City[]>(`/api/cities/${action.countryId}`).pipe(
+          this.http.get<City[]>(`https://prospective-essy-davidmd-97b05cc8.koyeb.app/api/cities/${action.countryId}`).pipe(
             map((cities) => CityActions.loadCitiesSuccess({ cities })),
             catchError((error) => of(CityActions.loadCitiesFailure({ error }))),
           ),
@@ -30,7 +30,7 @@ export class CityEffects {
       this.actions$.pipe(
         ofType(CityActions.addCity),
         mergeMap((action) =>
-          this.http.post<City>("/api/city", action.city).pipe(
+          this.http.post<City>("https://prospective-essy-davidmd-97b05cc8.koyeb.app/api/city", action.city).pipe(
             map((city) => CityActions.addCitySuccess({ city })),
             catchError((error) => of(CityActions.addCityFailure({ error }))),
           ),

@@ -19,7 +19,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.loadUsers),
         mergeMap(() =>
-          this.http.get<Person[]>("/api/persons").pipe(
+          this.http.get<Person[]>("https://prospective-essy-davidmd-97b05cc8.koyeb.app/api/persons").pipe(
             map((users) => UserActions.loadUsersSuccess({ users })),
             catchError((error) => of(UserActions.loadUsersFailure({ error }))),
           ),
@@ -31,7 +31,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.addUser),
         mergeMap((action) =>
-          this.http.post<Person>("/api/person", action.user).pipe(
+          this.http.post<Person>("https://prospective-essy-davidmd-97b05cc8.koyeb.app/api/person", action.user).pipe(
             map((user) => UserActions.addUserSuccess({ user })),
             catchError((error) => of(UserActions.addUserFailure({ error }))),
           ),

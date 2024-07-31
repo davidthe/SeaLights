@@ -17,7 +17,7 @@ export class CountryEffects {
       this.actions$.pipe(
         ofType(CountryActions.loadCountries),
         mergeMap(() =>
-          this.http.get<Country[]>("/api/countries").pipe(
+          this.http.get<Country[]>("https://prospective-essy-davidmd-97b05cc8.koyeb.app/api/countries").pipe(
             map((countries) =>
               CountryActions.loadCountriesSuccess({ countries }),
             ),
