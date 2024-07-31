@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AddCityDialogComponent } from './add-city-dialog.component';
+import { AddCityDialogComponent } from "./add-city-dialog.component";
 
-describe('AddCityDialogComponent', () => {
+describe("AddCityDialogComponent", () => {
   let component: AddCityDialogComponent;
   let fixture: ComponentFixture<AddCityDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddCityDialogComponent]
-    })
-    .compileComponents();
+      declarations: [AddCityDialogComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddCityDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

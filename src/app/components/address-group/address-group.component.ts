@@ -1,40 +1,48 @@
-import { AfterViewInit, Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormArray, FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Address } from '../../models/models';
+import { AfterViewInit, Component, forwardRef } from "@angular/core";
+import {
+  ControlValueAccessor,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+} from "@angular/forms";
+import { Address } from "../../models/models";
 
 @Component({
-  selector: 'app-address-group',
-  templateUrl: './address-group.component.html',
-  styleUrls: ['./address-group.component.scss'],
+  selector: "app-address-group",
+  templateUrl: "./address-group.component.html",
+  styleUrls: ["./address-group.component.scss"],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => AddressGroupComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
-export class AddressGroupComponent implements ControlValueAccessor, AfterViewInit {
+export class AddressGroupComponent
+  implements ControlValueAccessor, AfterViewInit
+{
   addresses: FormArray;
   value: Address[];
 
-  onChange = (value: Address[]) => { };
-  onTouched = () => { };
+  onChange = (value: Address[]) => {};
+  onTouched = () => {};
 
   constructor(private fb: FormBuilder) {
-    this.addresses = this.fb.array([this.createAddressGroup()])
+    this.addresses = this.fb.array([this.createAddressGroup()]);
   }
 
   ngAfterViewInit(): void {
-    this.addresses.valueChanges.subscribe(addresses => {
-      this.value = addresses
+    this.addresses.valueChanges.subscribe((addresses) => {
+      this.value = addresses;
       this.onChange(this.value);
       this.onTouched();
     });
   }
 
   writeValue(value: Address[]): void {
-    this.value = value
+    this.value = value;
   }
 
   registerOnChange(fn: any): void {
@@ -47,10 +55,10 @@ export class AddressGroupComponent implements ControlValueAccessor, AfterViewIni
 
   createAddressGroup(): FormGroup {
     return this.fb.group({
-      name: [''],
-      street: [''],
-      city: [''],
-      country: ['']
+      name: [""],
+      street: [""],
+      city: [""],
+      country: [""],
     });
   }
 

@@ -1,4 +1,4 @@
-<div [formGroup]="addressForm">
+<div class="address-form" [formGroup]="addressForm">
   <mat-form-field>
     <mat-label>Address Name</mat-label>
     <input matInput formControlName="name" required />
@@ -9,20 +9,30 @@
     <input matInput formControlName="street" required />
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Select City</mat-label>
-    <mat-select formControlName="city">
-      <mat-option *ngFor="let city of cities$ | async" [value]="city">
-        {{ city }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button mat-button [disabled]="selectedCountry.length === 0" (click)="addCityToSelectedCountry()">Add City</button>
-
+  <div class="select-city">
+    <mat-form-field>
+      <mat-label>Select City</mat-label>
+      <mat-select formControlName="city">
+        <mat-option *ngFor="let city of cities$ | async" [value]="city">
+          {{ city }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-button
+      [disabled]="selectedCountry.length === 0"
+      (click)="addCityToSelectedCountry()"
+    >
+      Add City
+    </button>
+  </div>
 
   <mat-form-field>
     <mat-label>Select Country</mat-label>
-    <mat-select formControlName="country" (valueChange)="setReleventCities($event)">
+    <mat-select
+      formControlName="country"
+      (valueChange)="setReleventCities($event)"
+    >
       <mat-option *ngFor="let country of countries$ | async" [value]="country">
         {{ country }}
       </mat-option>
