@@ -1,11 +1,14 @@
-import { Component, Host, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { City } from '../../../models/models';
-import { AddressGroupComponent } from '../address-group.component';
-import { Country } from './../../../models/models';
-import { loadCities } from '../../../store/city/city.actions';
+import { addCity, loadCities } from '../../../store/city/city.actions';
 import { selectAllCities } from '../../../store/city/city.selectors';
+import { loadCountries } from '../../../store/country/country.actions';
+import { selectAllCountries } from '../../../store/country/country.selectors';
+import { Country } from './../../../models/models';
+import { AddCityDialogComponent } from './add-city-dialog/add-city-dialog.component';
 
 @Component({
   selector: 'app-address',
@@ -16,12 +19,39 @@ export class AddressComponent {
   @Input() addressForm: any;
   cities$: Observable<string[]>;
   countries$: Observable<string[]>;
+  selectedCountry: string = ''
 
-  constructor(private citiesStore: Store<{ cities: City[] }>) {
-    this.citiesStore.dispatch(loadCities({ countryId: 1 }));
-
-    this.cities$ = this.citiesStore.select(selectAllCities).pipe(map(cities => cities?.map(c => c.name))) as Observable<string[]>;
-
+  constructor(public dialog: MatDialog, private citiesStore: Store<{ cities: City[] }>, private countriesStore: Store<{ countries: Country[] }>) {
+    this.countriesStore.dispatch(loadCountries());
+    this.countries$ = this.countriesStore.select(selectAllCountries).pipe(map(countries => countries?.map(c => c.name))) as Observable<string[]>;
   }
 
+  setReleventCities(value: any) {
+    this.selectedCountry = value;
+    this.updateReleventCities();
+  }
+
+  addCityToSelectedCountry() {
+    const dialogRef = this.dialog.open(AddCityDialogComponent, {
+      width: '250px',
+      data: { country: this.selectedCountry }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.countriesStore.select(selectAllCountries).subscribe(countries => {
+          this.citiesStore.dispatch(addCity({city: {countryId: countries.filter(c => c.name !== this.selectedCountry)[0]?.id, id: Math.random(), name:result}}));
+        })
+
+        this.updateReleventCities()
+      }
+    });}
+
+
+  private updateReleventCities() {
+    this.countriesStore.select(selectAllCountries).subscribe(countries => {
+      this.citiesStore.dispatch(loadCities({ countryId: countries.filter(c => c.name !== this.selectedCountry)[0]?.id ?? -1 }));
+      this.cities$ = this.citiesStore.select(selectAllCities).pipe(map(cities => cities?.map(c => c.name))) as Observable<string[]>;
+    });
+  }
 }

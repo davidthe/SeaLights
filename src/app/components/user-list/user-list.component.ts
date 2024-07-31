@@ -23,9 +23,7 @@ export class UserListComponent implements OnInit {
     this.store.dispatch(loadUsers());
     this.users$ = this.store.select(selectAllUsers);
     this.users$.subscribe(users => {
-      console.log(users)
       this.dataSource = new MatTableDataSource(users);
-
     });
   }
 

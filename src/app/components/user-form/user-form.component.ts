@@ -21,7 +21,7 @@ export class UserFormComponent {
       birthdate: ['', Validators.required],
       addresses: FormArray
     });
-    this.userForm.valueChanges.subscribe(console.log)
+    // this.userForm.valueChanges.subscribe(console.log)
   }
 
   onSubmit() {

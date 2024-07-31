@@ -17,10 +17,12 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-button [disabled]="selectedCountry.length === 0" (click)="addCityToSelectedCountry()">Add City</button>
+
 
   <mat-form-field>
     <mat-label>Select Country</mat-label>
-    <mat-select formControlName="country">
+    <mat-select formControlName="country" (valueChange)="setReleventCities($event)">
       <mat-option *ngFor="let country of countries$ | async" [value]="country">
         {{ country }}
       </mat-option>

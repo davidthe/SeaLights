@@ -24,6 +24,7 @@ import { CountryEffects } from './store/country/country.effects';
 import { countryReducer } from './store/country/country.reducer';
 import { UserEffects } from './store/user/user.effects';
 import { userReducer } from './store/user/user.reducer';
+import { AddCityDialogComponent } from './components/address-group/address/add-city-dialog/add-city-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { userReducer } from './store/user/user.reducer';
     AddressGroupComponent,
     UserFormComponent,
     UserListComponent,
-    AddressComponent
+    AddressComponent,
+    AddCityDialogComponent
   ],
   imports: [
     BrowserModule,
