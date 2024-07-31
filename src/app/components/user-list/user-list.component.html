@@ -1,1 +1,27 @@
-<p>user-list works!</p>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.name}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="birthdate">
+      <mat-header-cell *matHeaderCellDef> Birthdate </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.birthdate}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="addressesCount">
+      <mat-header-cell *matHeaderCellDef> Addresses Count </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.addresses?.length}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+  <button class="add-user" mat-raised-button color="primary" (click)="navigateToAddUser()">Add User</button>
+  
